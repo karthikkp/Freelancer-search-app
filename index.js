@@ -52,11 +52,38 @@ var createDivs = function(){
 	
 }
 
+var mouseDown = function(){
+	'use strict';
+		var search = document.getElementById("search");
+	search.style['padding'] = "2% 2.5% 2.5% 2.5%";
+}
+
+var mouseUp = function(){
+	'use strict';
+	var search = document.getElementById("search");
+	search.style['padding'] = "2.5%";
+}
+
+$("#container").ajaxStart(function(){
+	var div = document.createElement('div');
+	div.id = "img";
+	var img = document.createElement('img');
+	img.src = "ajax-loader.gif";
+	div.appendChild(img);
+	document.getElementById("container").appendChild(div);
+});
+$("#container").ajaxStop(function(){
+	$('#img').remove();
+});
+
+
 var search = function(){
 	'use strict';
+	$('#loading').show();
 	var keyword = document.getElementById("search_text").value;
 	var url = "http://api.freelancer.com/Project/Search.json?keyword=" + keyword + "&aff=karthickdoosra&count=100&callback=?";
 	$.getJSON(url,function(data){
+		$('#loading').hide();
 		var string = JSON.stringify(data);
  		items = JSON.parse(string);
  		console.log(items);
@@ -66,13 +93,14 @@ var search = function(){
  		else{
  			alert("Sorry your search returned no results");
  		}
- 		
-});
+	});
 }
 window.onload = function(){
 	'use strict';
 	if(document.getElementById("search").addEventListener){
 	document.getElementById("search").addEventListener('click',search,false);
+	document.getElementById("search").addEventListener('mousedown',mouseDown,false);
+	document.getElementById("search").addEventListener('mouseup',mouseUp,false);
 	document.getElementById("more").addEventListener('click',createDivs,false);
 	}
 	else if(document.getElementById("search").attachEvent){
