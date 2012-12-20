@@ -78,7 +78,7 @@ h1.desc{
     font-family: arial;
     font-size: 1em;
     font-weight: bold;
-    margin-left:50%;
+    margin-left:45%;
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -87,4 +87,12 @@ h1.bids{
 	font-size: 10px;
 	font-family: arial;
 
+}
+#loading{
+	display: none;
+	margin-left:38%;
+	font-family: Arial;
+	font-size: 16px;
+	color: #094AB2;
+	font-weight: bold;
 }
